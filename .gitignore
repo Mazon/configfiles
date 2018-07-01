@@ -4,8 +4,7 @@
 # dotconfigfiles
 !.gitignore
 !.vimrc
-!./vim
 !.tmux.conf
-!.vim/keymap.conf
+!.vim/keymap.vim
 !.gitconfig
 !README.md
