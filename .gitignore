@@ -1,10 +1,10 @@
 # Ignore Everything
 *
-./*
 
 # dotconfigfiles
 !.gitignore
 !.vimrc
+!./vim
 !.tmux.conf
 !.vim/keymap.conf
 !.gitconfig
