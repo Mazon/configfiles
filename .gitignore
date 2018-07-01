@@ -1,0 +1,12 @@
+# Ignore Everything
+*
+./*
+./vim/*
+
+# dotconfigfiles
+!.gitignore
+!.vimrc
+!.tmux.conf
+!.vim/keymap.conf
+!.gitconfig
+!README.md
