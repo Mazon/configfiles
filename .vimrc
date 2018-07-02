@@ -1,107 +1,74 @@
-"------------------------------------
-" Mazons vimrc
-"------------------------------------
-set nocompatible    " Don't be compatible with old vi.
-scriptencoding utf-8 
+" General
 
+set nocompatible "Don't be compatible with old vi.
+scriptencoding utf-8 
 filetype on "Detect file type.
-" Vundle Plugin Manager
+filetype plugin indent on   
+set noswapfile " Dont want any .swp laying around.
+set clipboard=unnamed "Clipboard sync os x
+set viminfo='1000,f1,:1000,/1000 " Enable a nice big viminfo file
+set history=500
+
+" Plugins 
+
 set rtp+=~/.vim/bundle/Vundle.vim 
 call vundle#begin() 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'fatih/vim-go'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'terryma/vim-smooth-scroll'
-Plugin 'aserebryakov/vim-todo-lists'
-Plugin 'rizzatti/dash.vim'
-Plugin 'yuttie/comfortable-motion.vim'
-Plugin 'kien/ctrlp.vim'
-
+Plugin 'VundleVim/Vundle.vim' " Plugin manager :PluginInstall
+Plugin 'fatih/vim-go' " Understand go
+Plugin 'tpope/vim-fugitive' " Understand git
+Plugin 'vim-airline/vim-airline' " Lean statusline
+Plugin 'vim-airline/vim-airline-themes' " theme airline
+Plugin 'terryma/vim-smooth-scroll' " smooth scrooling
+Plugin 'aserebryakov/vim-todo-lists' " .todo
+Plugin 'rizzatti/dash.vim' " Dash integration
+Plugin 'kien/ctrlp.vim' " fuzzy search
 call vundle#end()            
-filetype plugin indent on   
 
+" User Interface
 
+colorscheme vibrantink " Set colorscheme to something beutiful.
+syntax on " Syntax on for showing colors from scheme.
+set t_Co=256 " 256 colors
+let g:netrw_banner = 0 " Remove Banner from netrw
+set showcmd " Show us the command we're typing
 set cursorline
 autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
-
-" tmux integration
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . expand("%"))")
-set t_ts=^[k " set window title to:
-
 " Line numbers
 set relativenumber
 set number
+set visualbell t_vb= " no bell
+set hidden " Allow edit buffers to be hidden
+set winminheight=1 " 1 height windows
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . expand("%"))")
+set t_ts=^[k " set window title to:
 
-" System
-set t_Co=256 " 256 colors
-set noswapfile " Dont want any .swp laying around.
-set clipboard=unnamed "Clipboard sync
-set viminfo='1000,f1,:1000,/1000 " Enable a nice big viminfo file
-set history=500
-" Remove Banner from netrw
-let g:netrw_banner = 0
-" Make backspace delete lots of things
-set backspace=indent,eol,start
-" Show us the command we're typing
-set showcmd
-" Wrap on these
-set whichwrap+=<,>,[,]
-set fillchars=vert:┃,diff:⎼,fold:⎼
-" Highlight matching parentes
-set showmatch
+" Search
 
-" Search options
 set incsearch
 set ignorecase
 set infercase
 set hlsearch
+set showmatch " Highlight matching parentes
+set showfulltag " Show full tags when doing search completion
 
-" Show full tags when doing search completion
-set showfulltag
-set visualbell t_vb=
-" Syntax on for showing colors from scheme.
-syntax on
+" Text, tab and indent related
 
-" Allow edit buffers to be hidden
-set hidden
-
-" 1 height windows
-set winminheight=1
-
-" Do clever indent things. Don't make a # force column zero.
-set autoindent
-set smartindent
-inoremap # X<BS>#
-
-" make Y and S effect to end of line instead of whole linee
-map Y y$
-map S s$
-
-" Tab and Spaces
 set shiftwidth=2 " By default, go for an indent of 2
 set expandtab " Make tab always spaces.
 set tabstop=2
-set shiftwidth=2
 set softtabstop=2
+set backspace=indent,eol,start " Make backspace delete lots of things
+set autoindent " Do clever indent things. Don't make a # force column zero.
+set smartindent
 
-" Set colorscheme to something beutiful.
-colorscheme vibrantink
-
-" Filetype plugin eval.
-if has("eval")
-    filetype on
-    filetype plugin on
-    filetype indent on
-endif
-
-" Disable modelines, use securemodelines.vim instead
-set nomodeline
-let g:secure_modelines_verbose = 0
-let g:secure_modelines_modelines = 15
+inoremap # X<BS>#
+set whichwrap+=<,>,[,] " Wrap on these
+set fillchars=vert:┃,diff:⎼,fold:⎼
+set path+=Documents/ "Better include path handling
+let &inc.=' ["<]'
 
 " Statusline
+
 set noshowmode " Hide default message when entering modes.
 let g:airline_theme='bubblegum'
 let g:airline_powerline_fonts=0
@@ -116,30 +83,26 @@ set statusline+=%f\                          " file name
 set statusline+=%=                           " right align
 set statusline+=%2*
 setlocal numberwidth=3
-"--------------------------------------------------------
 
-"Better include path handling
-set path+=src/
-let &inc.=' ["<]'
+set nomodeline " Disable modelines, use securemodelines.vim instead
+let g:secure_modelines_verbose = 0
+let g:secure_modelines_modelines = 15
 
-" ======= KEYMAPINGS ===================================
+" Keymaps
+
 let mapleader = "," " set leader key
-"Sets the escape char to ,,
 inoremap ,, <Esc>
-
-"Runs Dash ( code doc library )
 :nnoremap <leader>d :Dash<cr>
-" Run go code
 au FileType go map <leader>r :!go run %
-
+nnoremap / /\v 
 nnoremap j gj
 nnoremap k gk
 " clear searches after 
 nnoremap <CR> :nohlsearch<cr> 
 " smooth  scrolling
-noremap <C-k> 14j14<C-e>
-noremap <C-l> 14k14<C-y>
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 5, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 5, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+" sudo save files if being stupid
+cmap w!! w !sudo tee % >/dev/null
