@@ -9,3 +9,5 @@
 !.gitconfig
 !README.md
 !vimrc.png
+!.vim/colors/vividchalk.vim
+!.vim/syntax/syncolor.vim

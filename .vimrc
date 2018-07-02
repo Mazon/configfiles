@@ -26,7 +26,8 @@ call vundle#end()
 
 " User Interface
 
-colorscheme vibrantink " Set colorscheme to something beutiful.
+"colorscheme vibrantink " Set colorscheme to something beutiful.
+colorscheme vividchalk " Set colorscheme to something beutiful.
 syntax on " Syntax on for showing colors from scheme.
 set t_Co=256 " 256 colors
 let g:netrw_banner = 0 " Remove Banner from netrw
