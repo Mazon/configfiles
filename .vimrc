@@ -5,13 +5,8 @@ set nocompatible    " Don't be compatible with old vi.
 scriptencoding utf-8 
 
 filetype on "Detect file type.
-"set list " Show tabs.
-"set listchars=tab:>-
 " Vundle Plugin Manager
 set rtp+=~/.vim/bundle/Vundle.vim 
-set cursorline
-autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
-
 call vundle#begin() 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
@@ -22,19 +17,18 @@ Plugin 'terryma/vim-smooth-scroll'
 Plugin 'aserebryakov/vim-todo-lists'
 Plugin 'rizzatti/dash.vim'
 Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()            
 filetype plugin indent on   
 
-let mapleader = ","
-let maplocalleader = ",,"
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-"unknowns
-set autowrite " auto save on make.
+set cursorline
+autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
+
+" tmux integration
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . expand("%"))")
-set t_ts=^[k
-set wildmenu
+set t_ts=^[k " set window title to:
 
 " Line numbers
 set relativenumber
@@ -93,7 +87,7 @@ set shiftwidth=2
 set softtabstop=2
 
 " Set colorscheme to something beutiful.
- colorscheme vibrantink
+colorscheme vibrantink
 
 " Filetype plugin eval.
 if has("eval")
@@ -128,5 +122,24 @@ setlocal numberwidth=3
 set path+=src/
 let &inc.=' ["<]'
 
-"source in keymappings.
-source ~/.vim/keymap.vim
+" ======= KEYMAPINGS ===================================
+let mapleader = "," " set leader key
+"Sets the escape char to ,,
+inoremap ,, <Esc>
+
+"Runs Dash ( code doc library )
+:nnoremap <leader>d :Dash<cr>
+" Run go code
+au FileType go map <leader>r :!go run %
+
+nnoremap j gj
+nnoremap k gk
+" clear searches after 
+nnoremap <CR> :nohlsearch<cr> 
+" smooth  scrolling
+noremap <C-k> 14j14<C-e>
+noremap <C-l> 14k14<C-y>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 5, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 5, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
