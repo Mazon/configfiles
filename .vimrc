@@ -5,10 +5,12 @@ set nocompatible    " Don't be compatible with old vi.
 scriptencoding utf-8 
 
 filetype on "Detect file type.
-set list " Show tabs.
-set listchars=tab:>-
+"set list " Show tabs.
+"set listchars=tab:>-
 " Vundle Plugin Manager
 set rtp+=~/.vim/bundle/Vundle.vim 
+set cursorline
+autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
 
 call vundle#begin() 
 Plugin 'VundleVim/Vundle.vim'
@@ -19,10 +21,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'aserebryakov/vim-todo-lists'
 Plugin 'rizzatti/dash.vim'
+Plugin 'yuttie/comfortable-motion.vim'
 
 call vundle#end()            
 filetype plugin indent on   
-"---------------------------------
 
 let mapleader = ","
 let maplocalleader = ",,"
@@ -41,7 +43,7 @@ set number
 " System
 set t_Co=256 " 256 colors
 set noswapfile " Dont want any .swp laying around.
-set clipboard=unnamed " Clipboard sync
+set clipboard=unnamed "Clipboard sync
 set viminfo='1000,f1,:1000,/1000 " Enable a nice big viminfo file
 set history=500
 " Remove Banner from netrw
