@@ -1,3 +1,0 @@
-Usage
-
-![vimrc](vimrc.png)
