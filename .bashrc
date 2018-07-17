@@ -47,9 +47,6 @@ alias poweroff="sudo poweroff"
 alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listening connections
 alias tmux="TERM=screen-256color-bce tmux"
 
-lsg() {
-ls -R $1 | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'
-}
 
 ls() {
   GLOBIGNORE="Documents:Library:Public:Music:Movies:Downloads:Dropbox \(Omise\):Sites:Pictures:VirtualBox VMs:Desktop"
