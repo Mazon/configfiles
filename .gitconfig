@@ -1,6 +1,6 @@
 [user]
-	name = hardy@omise.co
-	email = hardy@omise.co
+	name = hardy
+	useConfigOnly = true
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [color]
@@ -9,3 +9,12 @@
   branch = auto
 [github]
   name = mazone@gmail.com
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[diff "sopsdiffer"]
+	textconv = sops -d
