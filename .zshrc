@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 # General
 autoload -U colors && colors # Let's have some colors first
 autoload -U edit-command-line
@@ -7,9 +8,10 @@ zle -N edit-command-line
 # ENV
 export EDITOR=vim
 export TERM="xterm-256color"  # 256 color mode
-export PATH='~/bin:/usr/local/Cellar/jx/1.3.942/bin/:/usr/local/opt/coreutils/libexec/gnubin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/Users/hardy/bin/':$PATH
-export GOPATH=/Users/hardy/src
-# GPG hw setup
+export GOPATH=/Users/`whoami`/Projects/golang
+export PATH='/Users/'`whoami`'/google-cloud-sdk/bin/:~/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/bin:/usr/sbin:/Users/'`whoami`'/bin/:/bin':'/usr/local/MacGPG2/bin/gpgconf':$GOPATH/bin:$PATH
+#export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export LC_ALL=en_US.UTF-8
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpg-connect-agent updatestartuptty /bye
@@ -46,8 +48,8 @@ zle -N zle-line-finish
 fh() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
-source /Users/hardy/.zsh/fzf/key-bindings.zsh
-source /Users/hardy/.zsh/fzf/completion.zsh
+source /Users/`whoami`/.zsh/fzf/key-bindings.zsh
+source /Users/`whoami`/.zsh/fzf/completion.zsh
 
 
 setopt autocd # assume "cd" when a command is a directory # shell options
@@ -59,6 +61,8 @@ alias kubectl="kubectl " # kubectl expand
 alias ls="ls --color=auto" 
 alias diff="diff -u" # Make unified diff syntax the default
 alias sudo="sudo "  # expand sudo aliases
+alias encrypt="gpg --encrypt --armor --recipient mazone@gmail.com"
+alias backup="~/bin/backup.sh"
 
 # Completion system
 autoload -Uz compinit
@@ -118,10 +122,10 @@ source /usr/local/share/zsh-history-substring-search/zsh-history-substring-searc
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi # add autocomplete permanently to your zsh shell
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/hardy/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hardy/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '~/bin/google-cloud-sdk/path.zsh.inc' ]; then . '~/bin/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/hardy/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hardy/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '~/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '~/bin/google-cloud-sdk/completion.zsh.inc'; fi
 
 
 # VI MODE KEYBINDINGS (ins mode)
