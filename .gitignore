@@ -6,7 +6,7 @@
 !.vimrc
 !.tmux.conf
 !.vim/keymap.vim
-!.gitconfig
+.gitconfig
 !README.md
 !vimrc.png
 !.vim/colors/vividchalk.vim
