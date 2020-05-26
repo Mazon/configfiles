@@ -59,7 +59,7 @@ alias kubectl="kubectl " # kubectl expand
 alias ls="ls --color=auto" 
 alias diff="diff -u" # Make unified diff syntax the default
 alias sudo="sudo "  # expand sudo aliases
-alias encrypt="gpg --encrypt --armor --recipient mazone@gmail.com"
+alias encrypt="gpg --encrypt --armor""
 alias backup="~/bin/backup.sh"
 
 # Completion system
