@@ -1,12 +1,12 @@
 "Plugins 
 set rtp+=~/.vim/bundle/Vundle.vim 
 call vundle#begin() 
-Plugin 'VundleVim/Vundle.vim' "Plugin manager :PluginInstall
-Plugin 'fatih/vim-go' "Understand go
-Plugin 'tpope/vim-fugitive' "Understand git
-Plugin 'vim-airline/vim-airline' "Lean statusline
-Plugin 'vim-airline/vim-airline-themes' "Theme airline
-Plugin 'terryma/vim-smooth-scroll' "Smooth scrooling
+Plugin 'VundleVim/Vundle.vim' 
+Plugin 'fatih/vim-go' 
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline' 
+Plugin 'vim-airline/vim-airline-themes' 
+Plugin 'terryma/vim-smooth-scroll' 
 call vundle#end()            
 
 "General
@@ -20,7 +20,6 @@ set noswapfile "Dont want any .swp laying around.
 set clipboard=unnamed "Clipboard sync os x
 set viminfo='1000,f1,:1000,/1000 "Enable a nice big viminfo file
 set history=500
-"let g:netrw_banner = 0 "Remove Banner from netrw
 set showcmd "Show us the command we're typing
 set cursorline
 autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
@@ -38,10 +37,9 @@ set infercase
 set hlsearch
 set showmatch "Highlight matching parentes
 set showfulltag "Show full tags when doing search completion
-"Fuzzy File Search
-set rtp+=/usr/local/opt/fzf
+set rtp+=/usr/local/opt/fzf "Fuzzy search
 
-"Text, tab and indent related
+"Text
 set shiftwidth=2 "By default, go for an indent of 2
 set expandtab "Make tab always spaces.
 set tabstop=2
@@ -60,7 +58,6 @@ let g:airline_powerline_fonts=0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
-
 set laststatus=2
 set statusline=
 set statusline+=%-3.3n\                      "Buffer number
@@ -68,7 +65,6 @@ set statusline+=%f\                          "File name
 set statusline+=%=                           "Right align
 set statusline+=%2*
 setlocal numberwidth=3
-
 set nomodeline "Disable modelines, use securemodelines.vim instead
 let g:secure_modelines_verbose = 0
 let g:secure_modelines_modelines = 15
@@ -84,24 +80,15 @@ inoremap # X<BS>#
 nmap <Leader>l :BLines<CR>
 nmap <Leader>L :Lines<CR>
 nnoremap <Tab> :bnext<cr>
-"Toggle paste mode mode with <Leader>pp
 nnoremap <Leader>pp :set paste!<CR>
-"Shift + Tab to switch to previous open buffer
 nnoremap <S-Tab> :bprevious<cr>
 nnoremap j gj
 nnoremap k gk
-"Clear searches after 
 nnoremap <CR> :nohlsearch<cr> 
-"Smooth  scrolling
 noremap <silent> <c-k> :call smooth_scroll#up(&scroll, 5, 2)<CR>
 noremap <silent> <c-j> :call smooth_scroll#down(&scroll, 5, 2)<CR>
-"noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-"noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-"Sudo save files if being stupid
 cmap w!! w !sudo tee % >/dev/null
-"Quickly insert an empty new line without entering insert mode
 nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>
-"Allow insert of one char.
 nnoremap <Space> i_<Esc>r
 au FileType go map <leader>r :!go run % 
