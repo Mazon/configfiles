@@ -9,8 +9,7 @@ zle -N edit-command-line
 export EDITOR=vim
 export TERM="xterm-256color"  # 256 color mode
 export GOPATH=/Users/`whoami`/Projects/golang
-export PATH='/Users/'`whoami`'/google-cloud-sdk/bin/:~/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/bin:/usr/sbin:/Users/'`whoami`'/bin/:/bin':'/usr/local/MacGPG2/bin/gpgconf':$GOPATH/bin:$PATH
-#export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH='/usr/local/bin:/Users/'`whoami`'/google-cloud-sdk/bin/:~/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/bin:/usr/sbin:/Users/'`whoami`'/bin/:/bin':'/usr/local/MacGPG2/bin/gpgconf':$GOPATH/bin:$PATH
 export LC_ALL=en_US.UTF-8
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -20,7 +19,6 @@ HISTSIZE=10000  # Keep 1000 lines of history within the shell
 SAVEHIST=10000
 setopt HIST_IGNORE_ALL_DUPS
 HISTFILE="$HOME/.zsh_history"
-
 
 bindkey -v #VIM MODE
 PROMPT='%n@%m %1d$ ${vim_mode}$ '
@@ -82,9 +80,6 @@ zstyle ":completion:*" select-prompt %SScrolling active: current selection at %p
 zstyle ":completion:*" verbose true
 zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#)*=0=01;31"
 zstyle ":completion:*:kill:*" command "ps -u $USER -o pid,%cpu,tty,cputime,cmd"
-
-
-# Keybindings
 
 # Make ctrl-e edit the current command line
 autoload edit-command-line
@@ -181,3 +176,6 @@ if [ -f '~/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '~/bin/google-clou
     bindkey -M vicmd '\ed'   kill-word                         # Alt-d
     bindkey -M vicmd '\e[5~' history-beginning-search-backward # PageUp
     bindkey -M vicmd '\e[6~' history-beginning-search-forward # PageDown
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
